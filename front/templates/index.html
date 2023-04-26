@@ -1,0 +1,70 @@
+<html>
+<head>
+  <title>Steganography</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1>Online Steganography</h1>
+    </div>
+
+    <ul class="nav nav-pills nav-fill" id="tabs" data-tabs="tabs">
+      <li role="presentation" class="nav-item active"> <a class="nav-link" href="#encode" data-toggle="tab">Encoding</a></li>
+      <li role="presentation" class="nav-item"> <a class="nav-link" href="#decode" data-toggle="tab">Decoding</a></li>
+    </ul>
+
+    <div id="my-tab-content" class="tab-content">
+      <div class="tab-pane active" id="encode">
+        <div>
+          <h2>Encode message</h2>
+          <p class="alert alert-light" role="alert">
+            To encode a message into an image, choose the image you want to use, enter your text and hit the <strong>Encode</strong> button. <br/>
+            Save the last image, it will contain your hidden message. <br/>
+            Remember, the more text you want to hide, the larger the image has to be. In case you chose an image that is too small to hold your message you will be informed.
+          </p>
+          <form class="form" action="/encoded_image" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <input class="form-control-file" type="file" name="file" id="encodefile" onchange="return encodefilevalidation()"><br/>
+            </div>
+            <div class="form-group">
+              <label for="textarea">Message</label>
+              <textarea name="textmsg" class="form-control" id="textarea1" rows="3" placeholder="Enter your message...."></textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" class="encode btn btn-primary pull-right" value="Encode" id="encode_button" onclick="formvalidation()">
+            </div> 
+          </form>
+        </div>
+
+        <div id="encodeimagePreview"></div>
+      </div>
+
+      <div class="tab-pane" id="decode">
+        <div>
+          <h2>Decode image</h2>
+          <p class="alert alert-light" role="alert">
+            To decode a hidden message from an image, choose an image which is embedded with a secret message and hit the <strong>Decode</strong> button.
+          </p>
+          <form class="form" action="/decoding" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <input class="form-control-file" type="file" name="decodefile" id="decodefile" onchange="return decodefilevalidation()"><br/>
+            </div>
+
+            <div id="decodemessagebox"></div>
+
+            <div class="form-group">
+              <input type="submit" class="decode btn btn-primary pull-right" value="Decode" id="decodebutton">
+            </div>
+          </form>
+        </div>
+        <div id="decodeimagePreview"></div>
+      </div>
+
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="static/index.js"></script>
+</body>
+</html>
